@@ -12,9 +12,11 @@
     padding: 0;
     box-sizing: border-box;
     outline: none;
-    color: var(--font-color);
 }
 
 body {
+    display: flex;
     background: var(--background-color-main);
+    color: var(--font-color);
+    font-size: var(--main-font);
 }
