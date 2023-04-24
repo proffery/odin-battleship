@@ -121,6 +121,99 @@ module.exports = function (item) {
 
 /***/ }),
 
+/***/ "./src/Ship.js":
+/*!*********************!*\
+  !*** ./src/Ship.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Ship)
+/* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var Ship = /*#__PURE__*/function () {
+  function Ship(shipName, shipLength, shipHeadLocation, isVertical) {
+    _classCallCheck(this, Ship);
+    this.shipName = shipName;
+    this.shipLength = shipLength;
+    this.shipHeadLocation = shipHeadLocation;
+    this.isVertical = isVertical;
+    this.hits = 0;
+    this.shipMap = new Array(8);
+    for (var i = 0; i < this.shipMap.length; i++) {
+      this.shipMap[i] = new Array(8);
+    }
+    this.setShipMap(this.shipHeadLocation);
+  }
+  _createClass(Ship, [{
+    key: "getShipName",
+    value: function getShipName() {
+      return this.shipName;
+    }
+  }, {
+    key: "setShipMap",
+    value: function setShipMap(shipHeadLocation) {
+      for (var i = 0; i < this.shipMap.length; i++) {
+        for (var j = 0; j < this.shipMap[i].length; j++) {
+          this.shipMap[i][j] = false;
+        }
+      }
+      if (!this.isVertical) {
+        for (var _i = 0; _i < this.shipLength; _i++) {
+          this.shipMap[shipHeadLocation[0]][shipHeadLocation[1] + _i] = true;
+        }
+      } else {
+        for (var _i2 = 0; _i2 < this.shipLength; _i2++) {
+          this.shipMap[shipHeadLocation[0] + _i2][shipHeadLocation[1]] = true;
+        }
+      }
+    }
+  }, {
+    key: "getShipMap",
+    value: function getShipMap() {
+      return this.shipMap;
+    }
+  }, {
+    key: "setIsVertical",
+    value: function setIsVertical(_boolean) {
+      this.isVertical = _boolean;
+    }
+  }, {
+    key: "getIsVertical",
+    value: function getIsVertical() {
+      return this.isVertical;
+    }
+  }, {
+    key: "getShipLength",
+    value: function getShipLength() {
+      return this.shipLength;
+    }
+  }, {
+    key: "hit",
+    value: function hit() {
+      this.hits++;
+    }
+  }, {
+    key: "isSunk",
+    value: function isSunk() {
+      if (this.hits < this.shipLength) {
+        return false;
+      }
+      return true;
+    }
+  }]);
+  return Ship;
+}();
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/styles/style.css":
 /*!********************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/styles/style.css ***!
@@ -140,7 +233,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ":root {\r\n    --main-font: clamp(16px, calc(16px + (28 - 16) * ((100vw - 360px) / 1560)), 28px);\r\n    --font-color: rgb(19, 9, 46);\r\n    --background-color-main: rgb(19, 9, 46);\r\n    --background-color-block: rgba(255, 255, 255, 0.822);\r\n    --shadow: rgb(255, 255, 255) 0px 1px 3px, rgb(5, 5, 5) 0px 1px 3px;\r\n    --gradient: linear-gradient(90deg, rgba(36, 36, 44, 0.651) 0%, rgba(237, 237, 240, 0.329) 35%, rgba(36, 37, 37, 0.397) 100%);\r\n}\r\n\r\n* {\r\n    margin: 0;\r\n    padding: 0;\r\n    box-sizing: border-box;\r\n    outline: none;\r\n}\r\n\r\nbody {\r\n    background: var(--background-color-main);\r\n}", "",{"version":3,"sources":["webpack://./src/styles/style.css"],"names":[],"mappings":"AAAA;IACI,iFAAiF;IACjF,4BAA4B;IAC5B,uCAAuC;IACvC,oDAAoD;IACpD,kEAAkE;IAClE,4HAA4H;AAChI;;AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;IACtB,aAAa;AACjB;;AAEA;IACI,wCAAwC;AAC5C","sourcesContent":[":root {\r\n    --main-font: clamp(16px, calc(16px + (28 - 16) * ((100vw - 360px) / 1560)), 28px);\r\n    --font-color: rgb(19, 9, 46);\r\n    --background-color-main: rgb(19, 9, 46);\r\n    --background-color-block: rgba(255, 255, 255, 0.822);\r\n    --shadow: rgb(255, 255, 255) 0px 1px 3px, rgb(5, 5, 5) 0px 1px 3px;\r\n    --gradient: linear-gradient(90deg, rgba(36, 36, 44, 0.651) 0%, rgba(237, 237, 240, 0.329) 35%, rgba(36, 37, 37, 0.397) 100%);\r\n}\r\n\r\n* {\r\n    margin: 0;\r\n    padding: 0;\r\n    box-sizing: border-box;\r\n    outline: none;\r\n}\r\n\r\nbody {\r\n    background: var(--background-color-main);\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root {\r\n    --main-font: clamp(16px, calc(16px + (28 - 16) * ((100vw - 360px) / 1560)), 28px);\r\n    --font-color: rgb(228, 223, 241);\r\n    --background-color-main: rgb(19, 9, 46);\r\n    --background-color-block: rgba(255, 255, 255, 0.822);\r\n    --shadow: rgb(255, 255, 255) 0px 1px 3px, rgb(5, 5, 5) 0px 1px 3px;\r\n    --gradient: linear-gradient(90deg, rgba(36, 36, 44, 0.651) 0%, rgba(237, 237, 240, 0.329) 35%, rgba(36, 37, 37, 0.397) 100%);\r\n}\r\n\r\n* {\r\n    margin: 0;\r\n    padding: 0;\r\n    box-sizing: border-box;\r\n    outline: none;\r\n}\r\n\r\nbody {\r\n    display: flex;\r\n    background: var(--background-color-main);\r\n    color: var(--font-color);\r\n    font-size: var(--main-font);\r\n}", "",{"version":3,"sources":["webpack://./src/styles/style.css"],"names":[],"mappings":"AAAA;IACI,iFAAiF;IACjF,gCAAgC;IAChC,uCAAuC;IACvC,oDAAoD;IACpD,kEAAkE;IAClE,4HAA4H;AAChI;;AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;IACtB,aAAa;AACjB;;AAEA;IACI,aAAa;IACb,wCAAwC;IACxC,wBAAwB;IACxB,2BAA2B;AAC/B","sourcesContent":[":root {\r\n    --main-font: clamp(16px, calc(16px + (28 - 16) * ((100vw - 360px) / 1560)), 28px);\r\n    --font-color: rgb(228, 223, 241);\r\n    --background-color-main: rgb(19, 9, 46);\r\n    --background-color-block: rgba(255, 255, 255, 0.822);\r\n    --shadow: rgb(255, 255, 255) 0px 1px 3px, rgb(5, 5, 5) 0px 1px 3px;\r\n    --gradient: linear-gradient(90deg, rgba(36, 36, 44, 0.651) 0%, rgba(237, 237, 240, 0.329) 35%, rgba(36, 37, 37, 0.397) 100%);\r\n}\r\n\r\n* {\r\n    margin: 0;\r\n    padding: 0;\r\n    box-sizing: border-box;\r\n    outline: none;\r\n}\r\n\r\nbody {\r\n    display: flex;\r\n    background: var(--background-color-main);\r\n    color: var(--font-color);\r\n    font-size: var(--main-font);\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -549,10 +642,13 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.css */ "./src/styles/style.css");
+/* harmony import */ var _Ship__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ship */ "./src/Ship.js");
 
-console.log("Hello World!");
+
+var ship = new _Ship__WEBPACK_IMPORTED_MODULE_1__["default"]('Juggernaut', 4, [0, 0], true);
+console.log(ship.getShipMap());
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=maindf7dc22801cbb5e632b2.js.map
+//# sourceMappingURL=main90ccf6e5ceb3436503ef.js.map
