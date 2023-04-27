@@ -1,6 +1,5 @@
 export default class Ship {
-    constructor (shipName, shipLength, shipHeadLocation, isVertical) {
-        this.shipName = shipName
+    constructor (shipLength, shipHeadLocation, isVertical) {
         this.shipLength = shipLength
         this.shipHeadLocation = shipHeadLocation
         this.isVertical = isVertical
@@ -11,10 +10,7 @@ export default class Ship {
         }
         this.setShipMap(this.shipHeadLocation)
     }
-    
-    getShipName() {
-        return this.shipName
-    }
+
     
     setShipMap(shipHeadLocation) {
         for(let i = 0; i < this.shipMap.length; i++) {
@@ -22,20 +18,78 @@ export default class Ship {
                 this.shipMap[i][j] = false
             }
         }
+        
         if(this.isVertical) {
             for(let i = 0; i < this.shipLength; i++) {
-                this.shipMap[shipHeadLocation[1] + i][shipHeadLocation[0]] = true
+                try {
+                    this.shipMap[shipHeadLocation[1] + i][shipHeadLocation[0]] = true
+                }
+                catch {
+                    this.shipMap[shipHeadLocation[1] - (this.shipLength - i)][shipHeadLocation[0]] = true
+                }
             }
         }
         else {
             for(let i = 0; i < this.shipLength; i++) {
-                this.shipMap[shipHeadLocation[1]][shipHeadLocation[0] + i] = true
+                if (this.shipMap[shipHeadLocation[1]][shipHeadLocation[0] + i] === undefined) {
+                    this.shipMap[shipHeadLocation[1]][shipHeadLocation[0] - (this.shipLength - i)] = true
+                }
+                else {
+                    this.shipMap[shipHeadLocation[1]][shipHeadLocation[0] + i] = true
+                }
             }
         }
     }
 
     getShipMap() {
         return this.shipMap
+    }
+
+    getShipArea() {
+        let shipArea = new Array(8)
+        for(let i = 0; i < shipArea.length; i++) {
+            shipArea[i] = new Array(8)
+        }
+
+        for (let i = 0; i < this.shipMap.length; i++) {
+            for (let j = 0; j < this.shipMap[i].length; j++) {
+                shipArea[i][j] = this.shipMap[i][j]
+            }
+        }
+
+        for (let i = 0; i < shipArea.length; i++) {
+            for (let j = 0; j < shipArea[i].length; j++) {
+                if (j > 0 && j < shipArea.length) {
+                    if (shipArea[i][j] === true) {
+                        shipArea[i][j - 1] = true
+                    }
+                }
+
+                if (j == 0 && shipArea[i][j] === true) {
+                    shipArea[i][j + 1] = true
+                }
+                
+                if (j == shipArea.length && shipArea[i][j] === true) {
+                    shipArea[i][j - 1] = true
+                }
+
+                if (i > 0 && i < shipArea.length) {
+                    if (shipArea[i][j] === true) {
+                        shipArea[i - 1][j] = true
+                    }
+                }
+
+                if (i == 0 && shipArea[i][j] === true) {
+                    shipArea[i + 1][j] = true
+                }
+
+                if (i == shipArea.length && shipArea[i][j] === true) {
+                    shipArea[i - 1][j] = true
+                }
+            }
+        }
+     
+        return shipArea
     }
 
     setIsVertical(boolean) {
