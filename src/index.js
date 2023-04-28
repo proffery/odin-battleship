@@ -19,11 +19,13 @@ const fleet = [
         shipNumber: 4
     }
 ]
-gameboard.setAiShips(fleet)
-console.log(gameboard.getAiBoard())
-// const ship = new Ship(4, [6, 7], true)
-// console.log(ship.getShipMap())
-// console.log(ship.getShipArea())
+// gameboard.setAiShips(fleet)
+// console.log(gameboard.getAiBoard())
+// gameboard.setPlayerShips(fleet)
+// console.log(gameboard.getPlayerBoard())
+const ship = new Ship(1, [7, 2], true)
+console.log(ship.getShipMap())
+console.log(ship.getShipArea())
 // const ship1 = gameboard.generateShip(4)
 // const ship2 = gameboard.generateShip(3)
 // console.log(gameboard.isMapsIntersect(ship1.getShipMap(), ship2.getShipMap()))

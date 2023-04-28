@@ -2,21 +2,10 @@ import Ship from "./Ship"
 // const BOARD_SIZE = 8
 const gameboard = (() => {
    
-    // const playerBoard = new Array(8)
-    // for(let i = 0; i < playerBoard.length; i++) {
-    //     playerBoard[i] = new Array(8)
-    // }
-
+    let playerBoard = []
     let aiBoard = []
-    aiBoard = new Array(8)
-    for(let i = 0; i < aiBoard.length; i++) {
-        aiBoard[i] = new Array(8)
-    }
-    for(let i = 0; i < aiBoard.length; i++) {
-        for(let j = 0; j < aiBoard[i].length; j++) {
-            aiBoard[i][j] = false
-        }
-    }
+    aiBoard = initialArray(aiBoard)
+    playerBoard = initialArray(playerBoard)
     
     function setAiShips(fleet) {
         for (let i = 0; i < fleet.length; i++) {
@@ -33,8 +22,27 @@ const gameboard = (() => {
         }
     }
 
+    function setPlayerShips(fleet) {
+        for (let i = 0; i < fleet.length; i++) {
+            for (let j = 0; j < fleet[i].shipNumber; j++) {
+                let ship = generateShip(fleet[i].shipLength)
+                console.log(`Ship${j} is generated with length:${fleet[i].shipLength}`)
+                while (isMapsIntersect(ship.getShipArea(), playerBoard)) {
+                    ship = generateShip(fleet[i].shipLength)
+                    console.log(`Ship${j} REgenerated with length:${fleet[i].shipLength}`)
+                }
+                markShipOnMap(ship.getShipMap(), playerBoard)
+                // console.log(ship.getShipMap())
+            }
+        }
+    }
+
     function getAiBoard() {
         return aiBoard
+    }
+
+    function getPlayerBoard() {
+        return playerBoard
     }
 
     function markShipOnMap(shipMap, boardMap) {
@@ -74,9 +82,22 @@ const gameboard = (() => {
         return new Ship(shipLength, generateHeadLocation(), generateDirection())
     }
 
+    function initialArray(arr) {
+        arr = new Array(8)
+        for (let i = 0; i < arr.length; i++) {
+            arr[i] = new Array(8)
+        }
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr[i].length; j++) {
+                arr[i][j] = false
+            }
+        }
+        return arr
+    }
 
 
-    return {isMapsIntersect, generateShip, setAiShips, getAiBoard}
+    return {isMapsIntersect, generateShip, setAiShips, getAiBoard, setPlayerShips, getPlayerBoard}
 })()
 
 export default gameboard
+
