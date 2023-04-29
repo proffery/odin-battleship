@@ -24,7 +24,7 @@ body {
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
 }
 
 .header {
@@ -33,14 +33,22 @@ body {
     justify-content: center;
     grid-column: 1 / 3;
     grid-row: 1 / 2;
+    margin-top: 1rem;
 }
 
 .battle-area {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
     grid-column: 1 / 3;
     grid-row: 2 / 3;
+}
+
+.player-ships, .ai-ships {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .info-area {
@@ -64,6 +72,8 @@ body {
     border-radius: .5rem;
     padding: 1rem;
     box-shadow: var(--shadow);
+    background-color: var(--background-color-main);
+    opacity: .8;
 }
 
 .start-button {
@@ -71,5 +81,26 @@ body {
     border-radius: .3rem;
     padding-left: .3rem;
     padding-right: .3rem;
-    margin-top: .5rem;
+    margin: 1rem;
+}
+audio {
+    width: 15rem;
+    height: 2rem;
+}
+audio::-webkit-media-controls-enclosure {
+    border-radius: 5px;
+    background-color: var(--background-color-block);
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    background-color: var(--background-color-block);
+    height: 2rem;
+    width: 2rem;
+}
+.ship {
+    background-color: rgb(255, 127, 227);
 }

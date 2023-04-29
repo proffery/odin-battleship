@@ -7,7 +7,7 @@ const gameboard = (() => {
     aiBoard = initialArray(aiBoard)
     playerBoard = initialArray(playerBoard)
     
-    function setAiShips(fleet) {
+    function generateAiShips(fleet) {
         for (let i = 0; i < fleet.length; i++) {
             for (let j = 0; j < fleet[i].shipNumber; j++) {
                 let ship = generateShip(fleet[i].shipLength)
@@ -22,7 +22,7 @@ const gameboard = (() => {
         }
     }
 
-    function setPlayerShips(fleet) {
+    function generatePlayerShips(fleet) {
         for (let i = 0; i < fleet.length; i++) {
             for (let j = 0; j < fleet[i].shipNumber; j++) {
                 let ship = generateShip(fleet[i].shipLength)
@@ -96,7 +96,7 @@ const gameboard = (() => {
     }
 
 
-    return {isMapsIntersect, generateShip, setAiShips, getAiBoard, setPlayerShips, getPlayerBoard}
+    return {isMapsIntersect, generateShip, getAiBoard, generateAiShips, generatePlayerShips, getPlayerBoard}
 })()
 
 export default gameboard

@@ -2,6 +2,8 @@ import './styles/style.css'
 import Ship from './Ship'
 import gameboard from './Gameboard'
 import render from './render'
+const aiBoard = document.querySelector('.ai-ships')
+const playerBoard = document.querySelector('.player-ships')
 const fleet = [
     {
         shipLength: 4,
@@ -22,7 +24,10 @@ const fleet = [
 ]
 
 render.startGameWindow()
-// gameboard.setAiShips(fleet)
+gameboard.generateAiShips(fleet)
+render.setShipsOnBoard(gameboard.getAiBoard(), aiBoard)
+gameboard.generatePlayerShips(fleet)
+render.setShipsOnBoard(gameboard.getPlayerBoard(), playerBoard)
 // console.log(gameboard.getAiBoard())
 // gameboard.setPlayerShips(fleet)
 // console.log(gameboard.getPlayerBoard())
