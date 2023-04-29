@@ -65,6 +65,13 @@ const config = {
         }
       },
       {
+        test: /\.(mp3)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'audio/[name][ext]'
+        }
+      },
+      {
         test: /\.(ttf|woff|woff2)$/i,
         type: 'asset/resource',
         generator: {

@@ -57,16 +57,12 @@ export default class Ship {
             }
         }
 
-        for (let i = 0; i < shipArea.length; i++) {
-            for (let j = 0; j < shipArea[i].length; j++) {
-                if (j > 0 && j < shipArea.length - 1 ) {
+        for (let i = 0; i < this.shipMap.length; i++) {
+            for (let j = 0; j < this.shipMap[i].length; j++) {
+                if ((j > 0 && j < this.shipMap.length - 1) && (i > 0 && i < this.shipMap.length - 1)) {
                     if (this.shipMap[i][j] === true) {
                         shipArea[i][j - 1] = true
                         shipArea[i][j + 1] = true
-                    }
-                }
-                if (i > 0 && i < shipArea.length - 1) {
-                    if (this.shipMap[i][j] === true) {
                         shipArea[i - 1][j] = true
                         shipArea[i + 1][j] = true
                         shipArea[i - 1][j - 1] = true
@@ -75,47 +71,37 @@ export default class Ship {
                         shipArea[i - 1][j + 1] = true
                     }
                 }
-                // if (j === shipArea.length - 1) {
-                //     if (this.shipMap[i][j] === true) {
-                //         //shipArea[i][j + 1] = true
-                //         //shipArea[i][i] = true
-                //     }
-                // }
-                // if (i === shipArea.length - 1) {
-                //     if (this.shipMap[i][j] === true) {
-                //         //shipArea[i - 1][j] = true
-                //         shipArea[i + 1][j] = true
-                //         //shipArea[i - 1][j - 1] = true
-                //         //shipArea[i + 1][j + 1] = true
-                //         //shipArea[i + 1][j - 1] = true
-                //         //shipArea[i - 1][j + 1] = true
-                //     }
-                // }
+                if (i === 0 && j === 0) {
+                    if (this.shipMap[i][j] === true) {
+                        shipArea[i][j + 1] = true
+                        shipArea[i + 1][j] = true
+                        shipArea[i + 1][j + 1] = true
+                    }
+                }
+                if (i === 0 && j === this.shipMap.length - 1) {
+                    if (this.shipMap[i][j] === true) {
+                        shipArea[i][j - 1] = true
+                        shipArea[i + 1][j] = true
+                        shipArea[i + 1][j - 1] = true
+                    }
+                }
+                if (i === this.shipMap.length - 1 && j === this.shipMap.length - 1) {
+                    if (this.shipMap[i][j] === true) {
+                        shipArea[i][j - 1] = true
+                        shipArea[i - 1][j] = true
+                        shipArea[i - 1][j - 1] = true
+                    }
+                }
+                if (i === this.shipMap.length - 1 && j === 0) {
+                    if (this.shipMap[i][j] === true) {
+                        shipArea[i][j + 1] = true
+                        shipArea[i - 1][j] = true
+                        shipArea[i - 1][j + 1] = true
+                        console.log('this')
+                    }
+                }
             }
         }
-        // for (let i = 0; i < shipArea.length; i++) {
-        //     for (let j = 0; j < shipArea[i].length; j++) {
-        //     }
-        // }
-                // if (j == 0 && shipArea[i][j] === true) {
-                //     shipArea[i][j + 1] = true
-                // }
-                
-                // if (j == shipArea.length  && shipArea[i][j] === true) {
-                //     shipArea[i][j + 1] = true
-                // }
-
-                
-
-                // if (i == 0 && shipArea[i][j] === true) {
-                //     shipArea[i + 1][j] = true
-                // }
-
-                // if (i == shipArea.length && shipArea[i][j] === true) {
-                //     shipArea[i - 1][j] = true
-                // }
-        
-     
         return shipArea
     }
 
