@@ -1,12 +1,14 @@
 import Ship from "./Ship"
 let BOARD_SIZE = 8
 const gameboard = (() => {
-   
+    let playerFleet = []
+    let aiFleet = []
     let playerBoard = []
     let aiBoard = []
     cleanAiBoard()
     cleanPlayerBoard()
     
+
     function generateAiShips(fleet) {
         for (let i = 0; i < fleet.length; i++) {
             for (let j = 0; j < fleet[i].shipNumber; j++) {
@@ -16,6 +18,7 @@ const gameboard = (() => {
                     ship = generateShip(fleet[i].shipLength)
                     //console.log(`Ship${j} REgenerated with length:${fleet[i].shipLength}`)
                 }
+                aiFleet.push(ship)
                 markShipOnMap(ship.getShipMap(), aiBoard)
                 // console.log(ship.getShipMap())
             }
@@ -31,10 +34,15 @@ const gameboard = (() => {
                     ship = generateShip(fleet[i].shipLength)
                     //console.log(`Ship${j} REgenerated with length:${fleet[i].shipLength}`)
                 }
+                playerFleet.push(ship)
                 markShipOnMap(ship.getShipMap(), playerBoard)
                 // console.log(ship.getShipMap())
             }
         }
+    }
+
+    function getAiFleet() {
+        return aiFleet
     }
 
     function getAiBoard() {
@@ -43,10 +51,16 @@ const gameboard = (() => {
 
     function cleanAiBoard() {
         aiBoard = initialArray(aiBoard)
+        aiFleet = []
+    }
+
+    function getPlayerFleet() {
+        return playerFleet
     }
 
     function cleanPlayerBoard() {
         playerBoard = initialArray(playerBoard)
+        playerFleet = []
     }
 
     function getPlayerBoard() {
@@ -104,7 +118,7 @@ const gameboard = (() => {
     }
 
 
-    return {isMapsIntersect, generateShip, getAiBoard, generateAiShips, generatePlayerShips, getPlayerBoard, cleanAiBoard, cleanPlayerBoard}
+    return {isMapsIntersect, generateShip, getAiBoard, generateAiShips, generatePlayerShips, getPlayerBoard, cleanAiBoard, cleanPlayerBoard, getAiFleet, getPlayerFleet}
 })()
 
 export default gameboard

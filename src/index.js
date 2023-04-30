@@ -4,6 +4,8 @@ import gameboard from './Gameboard'
 import render from './render'
 const aiBoard = document.querySelector('.ai-ships')
 const playerBoard = document.querySelector('.player-ships')
+const aiInfo = document.querySelector('.ai-info')
+const playerInfo = document.querySelector('.player-info')
 const fleet = [
     {
         shipLength: 4,
@@ -32,19 +34,30 @@ function startGame() {
     gameboard.generatePlayerShips(fleet)
     render.setShipsOnBoard(gameboard.getPlayerBoard(), playerBoard)
     render.setShipsOnBoard(gameboard.getAiBoard(), aiBoard)
-
+    render.info(gameboard.getAiFleet(), aiInfo)
+    render.info(gameboard.getPlayerFleet(), playerInfo)
     startButton.addEventListener('click', () => {
         gameboard.cleanAiBoard()
         gameboard.cleanPlayerBoard()
-        render.cleanBoard(aiBoard)
-        render.cleanBoard(playerBoard)
+        render.cleanContainer(aiBoard)
+        render.cleanContainer(playerBoard)
+        render.cleanContainer(aiInfo)
+        // render.cleanContainer(playerInfo)
+        gameboard.generateAiShips(fleet)
+        render.setShipsOnBoard(gameboard.getAiBoard(), aiBoard)
+        render.info(gameboard.getAiFleet(), aiInfo)
+        render.info(gameboard.getPlayerFleet(), playerInfo)
         setPlayerShips(gameboard.getPlayerBoard())
+        
     })
 }
 
 function setPlayerShips(board) {
-    render.setPlayerShipsWindow(board)
+    render.setPlayerShipsWindow(board, fleet)
+    render.setShipsOnBoard(board, playerBoard)
 }
+
+
 
 // console.log(gameboard.getAiBoard())
 // gameboard.setPlayerShips(fleet)

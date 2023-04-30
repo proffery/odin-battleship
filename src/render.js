@@ -1,4 +1,7 @@
 import soundFileStartGame from './audio/startBattleSound.mp3'
+import Ship from './Ship'
+const AI_BOARD_NAME = 'AI-Zone:'
+const PLAYER_BOARD_NAME = 'Player-Zone'
 const render = (() => {
     const mainContainer = document.querySelector('.main-container')
     function startGameWindow() {
@@ -41,21 +44,70 @@ const render = (() => {
         }
     }
 
-    function cleanBoard(boardContainer) {
-        while (boardContainer.hasChildNodes()) {
-            boardContainer.removeChild(boardContainer.firstChild)
+    function cleanContainer(container) {
+        while (container.hasChildNodes()) {
+            container.firstChild.remove()
         }
     }
 
-    function setPlayerShipsWindow(boardArray) {
+    function setPlayerShipsWindow(boardArray, fleet) {
         const playerShipsWindow = document.createElement('div')
         playerShipsWindow.classList.add('set-player-window')
+        playerShipsWindow.textContent = 'Set ships on the board!'
         mainContainer.appendChild(playerShipsWindow)
         setShipsOnBoard(boardArray, playerShipsWindow)
+        renderFleet(fleet, playerShipsWindow)
+    }
+    
+    function renderFleet(fleet, container) {
+        for (let i = 0; i < fleet.length; i++) {
+            for (let j = 0; j < fleet[i].shipNumber; j++) {
+                const shipInfoContainer = document.createElement('div')
+                for(let n = 0; n < fleet[i].shipLength; n++) {
+                    shipInfoContainer.textContent += '□'
+                }
+                container.appendChild(shipInfoContainer)
+            }
+        }
     }
 
+    function info(fleetArray, infoContainer) {
+        fleetArray.forEach(ship => {
+            if(!ship.isSunk()) {
+                const shipInfoContainer = document.createElement('div')
+                shipInfoContainer.classList.add('ship-not-sunk')
+                for(let i = 0; i < ship.getShipLength(); i++) {
+                    shipInfoContainer.textContent += '□'
+                }
+                shipInfoContainer.textContent += ` - ${generateShipName(ship)}`
+                infoContainer.appendChild(shipInfoContainer)
+            }
+            else{
+                const shipInfoContainer = document.createElement('div')
+                shipInfoContainer.classList.add('ship-is-sunk')
+                for(let i = 0; i < ship.getShipLength(); i++) {
+                    shipInfoContainer.textContent += '☒'
+                }
+                shipInfoContainer.textContent += ` - ${generateShipName(ship)}`
+                infoContainer.appendChild(shipInfoContainer)
+            }
+        });
+    }
 
-return {startGameWindow, setShipsOnBoard, cleanBoard, setPlayerShipsWindow}
+    function generateShipName(ship) {
+        switch (ship.getShipLength()) {
+            case 1:
+                return 'Monitor'
+            case 2:
+                return 'Battlecruiser'
+            case 3:
+                return 'Dreadnought'
+            case 4:
+                return 'Juggernaut'
+        }
+    }
+    
+return {startGameWindow, setShipsOnBoard, cleanContainer, setPlayerShipsWindow, info}
 })()
 
 export default render
