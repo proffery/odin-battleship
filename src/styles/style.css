@@ -59,7 +59,7 @@ body {
     grid-row: 3 / 4;
 }
 
-.start-window {
+.start-window, .set-player-window {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,12 +1,13 @@
+let BOARD_SIZE = 8
 export default class Ship {
     constructor (shipLength, shipHeadLocation, isVertical) {
         this.shipLength = shipLength
         this.shipHeadLocation = shipHeadLocation
         this.isVertical = isVertical
         this.hits = 0
-        this.shipMap = new Array(8)
+        this.shipMap = new Array(BOARD_SIZE)
         for(let i = 0; i < this.shipMap.length; i++) {
-            this.shipMap[i] = new Array(8)
+            this.shipMap[i] = new Array(BOARD_SIZE)
         }
         this.setShipMap(this.shipHeadLocation)
     }

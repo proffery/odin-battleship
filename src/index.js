@@ -23,11 +23,29 @@ const fleet = [
     }
 ]
 
-render.startGameWindow()
-gameboard.generateAiShips(fleet)
-render.setShipsOnBoard(gameboard.getAiBoard(), aiBoard)
-gameboard.generatePlayerShips(fleet)
-render.setShipsOnBoard(gameboard.getPlayerBoard(), playerBoard)
+startGame()
+
+function startGame() {
+    render.startGameWindow()
+    const startButton = document.querySelector('.start-button')
+    gameboard.generateAiShips(fleet)
+    gameboard.generatePlayerShips(fleet)
+    render.setShipsOnBoard(gameboard.getPlayerBoard(), playerBoard)
+    render.setShipsOnBoard(gameboard.getAiBoard(), aiBoard)
+
+    startButton.addEventListener('click', () => {
+        gameboard.cleanAiBoard()
+        gameboard.cleanPlayerBoard()
+        render.cleanBoard(aiBoard)
+        render.cleanBoard(playerBoard)
+        setPlayerShips(gameboard.getPlayerBoard())
+    })
+}
+
+function setPlayerShips(board) {
+    render.setPlayerShipsWindow(board)
+}
+
 // console.log(gameboard.getAiBoard())
 // gameboard.setPlayerShips(fleet)
 // console.log(gameboard.getPlayerBoard())

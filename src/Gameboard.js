@@ -1,20 +1,20 @@
 import Ship from "./Ship"
-// const BOARD_SIZE = 8
+let BOARD_SIZE = 8
 const gameboard = (() => {
    
     let playerBoard = []
     let aiBoard = []
-    aiBoard = initialArray(aiBoard)
-    playerBoard = initialArray(playerBoard)
+    cleanAiBoard()
+    cleanPlayerBoard()
     
     function generateAiShips(fleet) {
         for (let i = 0; i < fleet.length; i++) {
             for (let j = 0; j < fleet[i].shipNumber; j++) {
                 let ship = generateShip(fleet[i].shipLength)
-                console.log(`Ship${j} is generated with length:${fleet[i].shipLength}`)
+                //console.log(`Ship${j} is generated with length:${fleet[i].shipLength}`)
                 while (isMapsIntersect(ship.getShipArea(), aiBoard)) {
                     ship = generateShip(fleet[i].shipLength)
-                    console.log(`Ship${j} REgenerated with length:${fleet[i].shipLength}`)
+                    //console.log(`Ship${j} REgenerated with length:${fleet[i].shipLength}`)
                 }
                 markShipOnMap(ship.getShipMap(), aiBoard)
                 // console.log(ship.getShipMap())
@@ -26,10 +26,10 @@ const gameboard = (() => {
         for (let i = 0; i < fleet.length; i++) {
             for (let j = 0; j < fleet[i].shipNumber; j++) {
                 let ship = generateShip(fleet[i].shipLength)
-                console.log(`Ship${j} is generated with length:${fleet[i].shipLength}`)
+                //console.log(`Ship${j} is generated with length:${fleet[i].shipLength}`)
                 while (isMapsIntersect(ship.getShipArea(), playerBoard)) {
                     ship = generateShip(fleet[i].shipLength)
-                    console.log(`Ship${j} REgenerated with length:${fleet[i].shipLength}`)
+                    //console.log(`Ship${j} REgenerated with length:${fleet[i].shipLength}`)
                 }
                 markShipOnMap(ship.getShipMap(), playerBoard)
                 // console.log(ship.getShipMap())
@@ -39,6 +39,14 @@ const gameboard = (() => {
 
     function getAiBoard() {
         return aiBoard
+    }
+
+    function cleanAiBoard() {
+        aiBoard = initialArray(aiBoard)
+    }
+
+    function cleanPlayerBoard() {
+        playerBoard = initialArray(playerBoard)
     }
 
     function getPlayerBoard() {
@@ -83,9 +91,9 @@ const gameboard = (() => {
     }
 
     function initialArray(arr) {
-        arr = new Array(8)
+        arr = new Array(BOARD_SIZE)
         for (let i = 0; i < arr.length; i++) {
-            arr[i] = new Array(8)
+            arr[i] = new Array(BOARD_SIZE)
         }
         for (let i = 0; i < arr.length; i++) {
             for (let j = 0; j < arr[i].length; j++) {
@@ -96,7 +104,7 @@ const gameboard = (() => {
     }
 
 
-    return {isMapsIntersect, generateShip, getAiBoard, generateAiShips, generatePlayerShips, getPlayerBoard}
+    return {isMapsIntersect, generateShip, getAiBoard, generateAiShips, generatePlayerShips, getPlayerBoard, cleanAiBoard, cleanPlayerBoard}
 })()
 
 export default gameboard

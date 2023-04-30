@@ -1,6 +1,4 @@
-import gameboard from './Gameboard'
 import soundFileStartGame from './audio/startBattleSound.mp3'
-
 const render = (() => {
     const mainContainer = document.querySelector('.main-container')
     function startGameWindow() {
@@ -20,7 +18,6 @@ const render = (() => {
         //startSound.play()
         startButton.addEventListener('click', () => {
             startWindow.remove(),
-            game(),
             startSound.pause()
         })
     }
@@ -44,12 +41,21 @@ const render = (() => {
         }
     }
 
-    function game() {
+    function cleanBoard(boardContainer) {
+        while (boardContainer.hasChildNodes()) {
+            boardContainer.removeChild(boardContainer.firstChild)
+        }
+    }
 
+    function setPlayerShipsWindow(boardArray) {
+        const playerShipsWindow = document.createElement('div')
+        playerShipsWindow.classList.add('set-player-window')
+        mainContainer.appendChild(playerShipsWindow)
+        setShipsOnBoard(boardArray, playerShipsWindow)
     }
 
 
-return {startGameWindow, setShipsOnBoard}
+return {startGameWindow, setShipsOnBoard, cleanBoard, setPlayerShipsWindow}
 })()
 
 export default render
