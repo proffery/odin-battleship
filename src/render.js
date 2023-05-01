@@ -53,9 +53,14 @@ const render = (() => {
     function setPlayerShipsWindow(boardArray, fleet) {
         const playerShipsWindow = document.createElement('div')
         playerShipsWindow.classList.add('set-player-window')
-        playerShipsWindow.textContent = 'Set ships on the board!'
         mainContainer.appendChild(playerShipsWindow)
-        setShipsOnBoard(boardArray, playerShipsWindow)
+        const windowHeader = document.createElement('div')
+        windowHeader.textContent = 'Set ships on the board!'
+        playerShipsWindow.appendChild(windowHeader)
+        const setPlayerBoard = document.createElement('div')
+        setPlayerBoard.classList.add('set-player-board')
+        playerShipsWindow.appendChild(setPlayerBoard)
+        setShipsOnBoard(boardArray, setPlayerBoard)
         renderFleet(fleet, playerShipsWindow)
     }
     
@@ -63,10 +68,17 @@ const render = (() => {
         for (let i = 0; i < fleet.length; i++) {
             for (let j = 0; j < fleet[i].shipNumber; j++) {
                 const shipInfoContainer = document.createElement('div')
+                shipInfoContainer.classList.add('ship-for-set')
+                shipInfoContainer.setAttribute('type', i)
+                shipInfoContainer.setAttribute('number', j)
+                shipInfoContainer.setAttribute('value', fleet[i].shipLength)
                 for(let n = 0; n < fleet[i].shipLength; n++) {
                     shipInfoContainer.textContent += '□'
                 }
                 container.appendChild(shipInfoContainer)
+                shipInfoContainer.addEventListener('mousedown', () => {
+                    shipInfoContainer.remove()
+                })
             }
         }
     }
@@ -104,6 +116,8 @@ const render = (() => {
                 return 'Dreadnought'
             case 4:
                 return 'Juggernaut'
+            default: 
+                return 'Coloss'
         }
     }
     

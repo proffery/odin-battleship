@@ -55,6 +55,33 @@ function startGame() {
 function setPlayerShips(board) {
     render.setPlayerShipsWindow(board, fleet)
     render.setShipsOnBoard(board, playerBoard)
+    const allShips = document.querySelectorAll('.ship-for-set')
+    allShips.forEach(ship => ship.addEventListener('mousedown', () => {
+        const createShip = new Ship(ship.getAttribute('value'), [0, 0], false)
+        gameboard.addPlayerShipToFleet(createShip)
+        console.log(gameboard.getPlayerFleet())
+        const playerShipsBoard = document.querySelector('.set-player-board')
+        const allCells = document.querySelectorAll('.set-player-board .row .cell')
+        const lastShip = gameboard.getPlayerShipFromFleet(gameboard.getPlayerFleet().length - 1)
+        
+        allCells.forEach(cell => cell.addEventListener('mouseup', () => {
+            if(!gameboard.isMapsIntersect(lastShip.getShipArea(), board)) {
+                lastShip.setShipMap([cell.getAttribute('col'), cell.getAttribute('row')])
+                console.log([cell.getAttribute('col'), cell.getAttribute('row')])
+                gameboard.markShipOnMap(lastShip.getShipMap(), board)
+                render.cleanContainer(playerBoard)
+                render.cleanContainer(playerShipsBoard)
+                render.setShipsOnBoard(board, playerBoard)
+                render.setShipsOnBoard(board, playerShipsBoard)
+            }
+        }))
+        // allCells.forEach(cell => cell.addEventListener('mouseleave', () => {
+        //     gameboard.removeShipFromMap(lastShip.getShipMap(), board)
+        //     render.cleanContainer(playerShipsBoard)
+        //     render.setShipsOnBoard(board, playerShipsBoard)
+        // }))
+    }))
+
 }
 
 

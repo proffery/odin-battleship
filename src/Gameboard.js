@@ -41,6 +41,14 @@ const gameboard = (() => {
         }
     }
 
+    function addPlayerShipToFleet(ship) {
+        playerFleet.push(ship)
+    }
+
+    function getPlayerShipFromFleet(shipArrNumber) {
+        return playerFleet[shipArrNumber]
+    }
+
     function getAiFleet() {
         return aiFleet
     }
@@ -72,6 +80,16 @@ const gameboard = (() => {
             for (let j = 0; j < boardMap[i].length; j++) {
                 if(shipMap[i][j] === true) {
                     boardMap[i][j] = shipMap[i][j]
+                }
+            }
+        }
+    }
+
+    function removeShipFromMap(shipMap, boardMap) {
+        for (let i = 0; i < boardMap.length; i++) {
+            for (let j = 0; j < boardMap[i].length; j++) {
+                if(shipMap[i][j] === true) {
+                    boardMap[i][j] = false
                 }
             }
         }
@@ -118,7 +136,9 @@ const gameboard = (() => {
     }
 
 
-    return {isMapsIntersect, generateShip, getAiBoard, generateAiShips, generatePlayerShips, getPlayerBoard, cleanAiBoard, cleanPlayerBoard, getAiFleet, getPlayerFleet}
+    return {isMapsIntersect, generateShip, getAiBoard, generateAiShips, generatePlayerShips, 
+        getPlayerBoard, cleanAiBoard, cleanPlayerBoard, getAiFleet, getPlayerFleet, 
+        addPlayerShipToFleet, getPlayerShipFromFleet, markShipOnMap, removeShipFromMap}
 })()
 
 export default gameboard
